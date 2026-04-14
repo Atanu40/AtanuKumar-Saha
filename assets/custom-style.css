@@ -1,0 +1,111 @@
+/*--------- Tailwind Component class -----------*/
+
+@layer components {
+  .btn {
+    @apply !gen-text-[14px] !gen-leading-[172%] !gen-tracking-[0.28px] !gen-font-bold gen-transition-all gen-duration-300 gen-ease-in-out gen-font-primary;
+  }
+
+  .primary--button {
+    @apply !gen-transition-all !gen-duration-300 !gen-ease-in-out hover:gen-bg-[var(--primary-button-hover-background)] hover:gen-text-[var(--primary-button-hover-text)];
+  }
+
+  .secondary-button {
+    @apply gen-bg-[var(--secondary-button-background)] gen-text-[var(--secondary-button-text)] gen-border-2 gen-border-solid gen-border-[var(--secondary-button-border)] !gen-transition-all !gen-duration-300 !gen-ease-in-out hover:gen-bg-[var(--secondary-button-background)] hover:gen-text-[var(--secondary-button-text)];
+  }
+
+  .tertiary-button {
+    @apply gen-bg-[var(--tertiary-button-background)] gen-text-[var(--tertiary-button-text)] !gen-transition-all !gen-duration-300 !gen-ease-in-out hover:gen-bg-[var(--tertiary-button-hover-background)] hover:gen-text-[var(--tertiary-button-hover-text)];
+  }
+
+  .btn-padding-small {
+    @apply gen-py-[6px] gen-px-[8px];
+  }
+
+  .btn-padding-medium {
+    @apply gen-py-[12px] gen-px-[28px];
+  }
+
+  .btn-padding-large {
+    @apply gen-py-[8px] gen-px-[24px];
+  }
+
+  .heading-h1-pro {
+    @apply gen-text-[40px] min-[768px]:gen-text-[56px] min-[1030px]:gen-text-[80px] gen-leading-[100%] min-[768px]:gen-leading-[92%] min-[1030px]:gen-leading-[90%] gen-tracking-[-0.4px] min-[768px]:gen-tracking-[-0.6px] min-[1030px]:gen-tracking-[-1.6px] gen-font-black gen-font-primary;
+  }
+
+  .heading-h1 {
+    @apply gen-text-[36px] min-[768px]:gen-text-[40px] min-[1030px]:gen-text-[52px] gen-tracking-normal min-[768px]:gen-tracking-[0.24px] min-[1030px]:gen-tracking-[-1.04px] gen-leading-[110%] gen-font-semibold gen-font-primary;
+  }
+
+  .heading-h2 {
+    @apply gen-text-[32px] min-[768px]:gen-text-[36px] min-[1030px]:gen-text-[48px] gen-tracking-normal min-[768px]:gen-tracking-[-0.18px] min-[1030px]:gen-tracking-[-0.96px] gen-leading-[100%] gen-font-semibold gen-font-primary;
+  }
+
+  .heading-h3 {
+    @apply gen-text-[24px] min-[768px]:gen-text-[28px] min-[1030px]:gen-text-[32px] gen-tracking-normal min-[768px]:gen-tracking-[0.56px] min-[1030px]:gen-tracking-[-0.32px] gen-leading-[100%] gen-font-[700] gen-font-primary;
+  }
+
+  .heading-h3-small {
+    @apply gen-text-[24px] min-[768px]:gen-text-[28px] gen-tracking-normal min-[768px]:gen-tracking-[0.56px] min-[1030px]:gen-tracking-[-0.32px] gen-leading-[100%] gen-font-[700] gen-font-primary;
+  }
+
+  .heading-h4 {
+    @apply gen-text-[18px] min-[768px]:gen-text-[22px] min-[1030px]:gen-text-[24px] gen-tracking-normal min-[768px]:gen-tracking-[0.44px] min-[1030px]:gen-tracking-normal gen-leading-[133%] gen-font-bold gen-font-primary;
+  }
+
+  .heading-card-drawer {
+    @apply gen-text-[22px] gen-leading-[normal] gen-font-[500] gen-font-primary;
+  }
+
+  .text-extra-small {
+    @apply gen-text-[12px] gen-leading-[133%] gen-font-bold gen-font-primary;
+  }
+
+  .text-small {
+    @apply gen-text-[14px] gen-leading-[143%] gen-font-bold gen-font-primary;
+  }
+
+  .text-medium {
+    @apply !gen-text-[16px] gen-leading-[137%] gen-font-medium gen-tracking-normal gen-font-primary;
+  }
+
+  .text-normal {
+    @apply gen-text-[16px] gen-leading-[137%] gen-font-normal gen-tracking-normal gen-font-primary;
+  }
+
+  .text-large {
+    @apply gen-text-[18px] gen-leading-[120%] gen-font-medium gen-font-primary;
+  }
+
+  .richtext-pro h1 {
+    @apply gen-text-[40px] min-[750px]:gen-text-[52px] gen-font-[600] gen-font-primary;
+  }
+
+  .richtext-pro h2 {
+    @apply gen-text-[32px] min-[750px]:gen-text-[48px] gen-font-[600] gen-font-primary;
+  }
+
+  .richtext-pro h3 {
+    @apply gen-text-[17px] min-[750px]:gen-text-[18px] gen-font-[600] gen-font-primary;
+  }
+
+  .richtext-pro p {
+    @apply gen-text-[16px] gen-font-[500] gen-font-primary gen-leading-[137%];
+  }
+
+  .richtext-pro p a {
+    @apply gen-text-[16px] gen-font-[500] gen-font-primary gen-leading-[137%] gen-underline;
+  }
+
+  .richtext-pro p strong {
+    @apply gen-text-[16px] gen-font-[600] gen-font-primary gen-leading-[137%];
+  }
+
+  .richtext-pro ul li {
+    @apply gen-text-[16px] gen-font-[500] gen-font-primary gen-leading-[137%] gen-pb-[10px];
+  }
+
+  .richtext-pro ol li {
+    @apply gen-text-[16px] gen-font-[500] gen-font-primary gen-leading-[137%] gen-pb-[10px];
+  }
+}

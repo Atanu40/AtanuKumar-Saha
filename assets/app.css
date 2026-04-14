@@ -1,6 +1,6 @@
-/*
-! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com
-*/
+/*--------- Tailwind Component class -----------*/
+
+/*! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com*/
 
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -556,27 +556,14 @@ video {
   line-height: 1;
 }
 
-@media (min-width: 750px) {
-  .md\:gen-text-8xl {
-    font-size: 6rem;
-    line-height: 1;
-  }
+.gen-text-\[\#b31858ee\] {
+  color: #b31858ee;
+}
 
+@media (min-width: 750px) {
   .md\:gen-text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
-  }
-}
-
-@media (min-width: 990px) {
-  .lg\:gen-text-7xl {
-    font-size: 4.5rem;
-    line-height: 1;
-  }
-
-  .lg\:gen-text-9xl {
-    font-size: 8rem;
-    line-height: 1;
   }
 }
 
