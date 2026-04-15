@@ -9,7 +9,7 @@ html {
 @layer components {
 
   .heading-h1 {
-    @apply gen-text-[36px] min-[768px]:gen-text-[40px] min-[1030px]:gen-text-[70px] gen-tracking-normal min-[768px]:gen-tracking-[0.24px] min-[1030px]:gen-tracking-[0px] gen-leading-[100%] gen-font-medium ;
+    @apply gen-text-[38px] min-[768px]:gen-text-[40px] min-[1030px]:gen-text-[70px] gen-tracking-normal min-[768px]:gen-tracking-[0.24px] min-[1030px]:gen-tracking-[0px] gen-leading-[100%] gen-font-semibold ;
   }
 
   .heading-h2 {
@@ -17,11 +17,11 @@ html {
   }
 
   .text-normal {
-    @apply gen-text-[20px] gen-leading-[140%] gen-font-normal gen-tracking-[0px] ;
+    @apply gen-text-[18px] min-[750px]:gen-text-[20px] gen-leading-[140%] gen-font-normal gen-tracking-[0px] ;
   }
 
   .btn {
-    @apply !gen-px-12 !gen-py-4 !gen-text-[16px] !gen-leading-[20.48px] !gen-tracking-[0px] !gen-font-normal gen-transition-all gen-duration-300 gen-ease-in-out ;
+    @apply !gen-px-12 !gen-py-[1.5rem] !gen-text-[16px] !gen-leading-[20.48px] !gen-tracking-[0px] !gen-font-normal gen-transition-all gen-duration-300 gen-ease-in-out ;
   }
 
   .btn-secondary-border{
@@ -29,8 +29,27 @@ html {
   }
 
   .btn-tertiary{
-    @apply gen-underline !gen-cursor-pointer !gen-p-[0]
+    @apply gen-underline !gen-cursor-pointer !gen-p-[0] !gen-bg-transparent
   }
 
 }
 
+.btn-tertiary::after{
+  content: none;
+}
+
+.custom-button.button:after {
+  content: none;
+}
+
+.btn-tertiary.button--secondary:after {
+  --border-opacity: var(--tertiary-buttons-border-opacity);
+}
+
+.btn-tertiary-underline{
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+  text-decoration-thickness: 1px;
+}

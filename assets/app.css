@@ -5,6 +5,27 @@ html {
 
 /*--------- Tailwind Component class -----------*/
 
+.btn-tertiary::after{
+  content: none;
+}
+
+.custom-button.button:after {
+  content: none;
+}
+
+.btn-tertiary.button--secondary:after {
+  --border-opacity: var(--tertiary-buttons-border-opacity);
+}
+
+.btn-tertiary-underline{
+  -webkit-text-decoration-skip: ink;
+          text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+  text-decoration-thickness: 1px;
+}
+
 /*! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com*/
 
 /*
@@ -557,8 +578,8 @@ video {
 }
 
 .heading-h1 {
-  font-size: 36px;
-  font-weight: 500;
+  font-size: 38px;
+  font-weight: 600;
   line-height: 100%;
   letter-spacing: 0em;
 }
@@ -608,6 +629,47 @@ video {
   }
 }
 
+.text-normal {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 140%;
+  letter-spacing: 0px;
+}
+
+@media (min-width: 750px) {
+  .text-normal {
+    font-size: 20px;
+  }
+}
+
+.btn {
+  padding-left: 3rem !important;
+  padding-right: 3rem !important;
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 20.48px !important;
+  letter-spacing: 0px !important;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-secondary-border {
+  border-width: 1px !important;
+  border-style: solid !important;
+  border-color: var(--color-secondary-button-border) !important;
+}
+
+.btn-tertiary {
+  cursor: pointer !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
+}
+
 .gen-absolute {
   position: absolute;
 }
@@ -632,6 +694,14 @@ video {
   margin-bottom: 25px;
 }
 
+.gen-block {
+  display: block;
+}
+
+.\!gen-flex {
+  display: flex !important;
+}
+
 .gen-flex {
   display: flex;
 }
@@ -640,16 +710,60 @@ video {
   display: grid;
 }
 
+.gen-hidden {
+  display: none;
+}
+
+.gen-aspect-auto {
+  aspect-ratio: auto;
+}
+
+.\!gen-h-full {
+  height: 100% !important;
+}
+
 .gen-h-0 {
   height: 0px;
+}
+
+.gen-h-auto {
+  height: auto;
 }
 
 .gen-h-full {
   height: 100%;
 }
 
+.\!gen-w-full {
+  width: 100% !important;
+}
+
 .gen-w-full {
   width: 100%;
+}
+
+.gen-min-w-\[220px\] {
+  min-width: 220px;
+}
+
+.gen-max-w-\[500px\] {
+  max-width: 500px;
+}
+
+.gen-flex-col {
+  flex-direction: column;
+}
+
+.\!gen-items-center {
+  align-items: center !important;
+}
+
+.\!gen-gap-\[12px\] {
+  gap: 12px !important;
+}
+
+.gen-gap-\[32px\] {
+  gap: 32px;
 }
 
 .gen-gap-x-\[12px\] {
@@ -675,6 +789,11 @@ video {
      object-fit: cover;
 }
 
+.gen-py-\[15px\] {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
 .gen-py-\[8px\] {
   padding-top: 8px;
   padding-bottom: 8px;
@@ -682,6 +801,38 @@ video {
 
 .gen-pb-\[100\%\] {
   padding-bottom: 100%;
+}
+
+.gen-pb-\[15\%\] {
+  padding-bottom: 15%;
+}
+
+.gen-pt-\[25\%\] {
+  padding-top: 25%;
+}
+
+.gen-text-center {
+  text-align: center;
+}
+
+.gen-text-\[15px\] {
+  font-size: 15px;
+}
+
+.gen-text-\[16px\] {
+  font-size: 16px;
+}
+
+.gen-font-normal {
+  font-weight: 400;
+}
+
+.gen-leading-\[13\.42px\] {
+  line-height: 13.42px;
+}
+
+.gen-tracking-\[0px\] {
+  letter-spacing: 0px;
 }
 
 .gen-text-\[\#b31858ee\] {
@@ -692,9 +843,21 @@ video {
   .min-\[560px\]\:gen-mb-\[30px\] {
     margin-bottom: 30px;
   }
+
+  .min-\[560px\]\:\!gen-gap-\[10px\] {
+    gap: 10px !important;
+  }
 }
 
 @media (min-width: 750px) {
+  .min-\[750px\]\:gen-block {
+    display: block;
+  }
+
+  .min-\[750px\]\:gen-hidden {
+    display: none;
+  }
+
   .min-\[750px\]\:gen-gap-x-\[16px\] {
     -moz-column-gap: 16px;
          column-gap: 16px;
@@ -704,14 +867,30 @@ video {
     row-gap: 16px;
   }
 
+  .min-\[750px\]\:gen-pb-\[10\%\] {
+    padding-bottom: 10%;
+  }
+
   .min-\[750px\]\:gen-pb-\[90\%\] {
     padding-bottom: 90%;
+  }
+
+  .min-\[750px\]\:gen-pt-\[20\%\] {
+    padding-top: 20%;
+  }
+
+  .min-\[750px\]\:gen-text-left {
+    text-align: left;
   }
 }
 
 @media (min-width: 830px) {
   .min-\[830px\]\:gen-mb-\[36px\] {
     margin-bottom: 36px;
+  }
+
+  .min-\[830px\]\:gen-pb-\[7\%\] {
+    padding-bottom: 7%;
   }
 }
 
@@ -723,5 +902,11 @@ video {
 
   .min-\[1030px\]\:gen-gap-y-\[18px\] {
     row-gap: 18px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .min-\[1200px\]\:gen-text-\[18px\] {
+    font-size: 18px;
   }
 }
