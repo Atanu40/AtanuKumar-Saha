@@ -1,0 +1,245 @@
+{% style %}
+ .overlay-bannerImage{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, {{ section.settings.image_overlay_opacity | divided_by: 100.0 }});
+    pointer-events: none;
+ }
+
+  @media (max-width: 750px) {
+   .small-device-btn-alignment{
+     align-items: center;
+     justify-content: center;
+   }
+
+   .max-width-small-device{
+     margin-left: auto;
+     margin-right: auto;
+   }
+  }
+
+  .hero-btn-swipe {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transition: color 0.35s ease;
+  }
+
+  .hero-btn-swipe::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: #efe642;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s ease;
+    z-index: -1;
+  }
+
+  .hero-btn-swipe:hover,
+  .hero-btn-swipe:focus-visible {
+    color: #000000;
+  }
+
+  .hero-btn-swipe:hover::after{
+    content: none;
+  }
+
+  .hero-btn-swipe:hover::before,
+  .hero-btn-swipe:focus-visible::before {
+    transform: scaleX(1);
+  }
+{% endstyle %}
+
+
+<div class="gen-flex gen-relative gen-overflow-hidden gen-w-full gen-h-full">
+  {% render 'image' with section.settings.image_bg , class: 'gen-hidden min-[750px]:gen-block gen-absolute gen-top-0 gen-left-0 !gen-w-full !gen-h-full' %}
+  {% render 'image' with section.settings.image_bg_sm , class: 'gen-block min-[750px]:gen-hidden gen-absolute gen-top-0 gen-left-0 !gen-w-full !gen-h-full' %}
+    <div class="overlay-bannerImage">&nbsp;</div>
+    <div class="color-{{ section.settings.color_scheme }} gradient gen-w-full">
+      <div class="{% if section.settings.container_section == 'fit' %} page-width {% endif %}">
+        <div class="max-width-small-device gen-max-w-[500px] gen-pt-[25%] min-[750px]:gen-pt-[20%] gen-pb-[15%] min-[750px]:gen-pb-[10%] min-[830px]:gen-pb-[7%] gen-flex gen-flex-col gen-gap-[32px] gen-relative gen-z-[1]">
+          {% for block in section.blocks %}
+
+            {%- liquid
+              if block.settings.button_1_type == 'primary'
+                assign button_type_1 = 'button--primary'
+              elsif block.settings.button_1_type == 'secondary'
+                assign button_type_1 = 'button--secondary btn-secondary-border'  
+              elsif block.settings.button_1_type == 'tertiary'
+                assign button_type_1 = 'button--secondary btn-tertiary btn-tertiary-underline'
+              endif
+            -%}
+
+            {% case block.type %}
+              {% when 'heading' %}
+                <h2 class="heading-h1 gen-text-center min-[750px]:gen-text-left">{{ block.settings.heading }}</h2>
+              {% when 'text' %}
+                <div class="text-normal gen-text-center min-[750px]:gen-text-left">{{ block.settings.text }}</div>
+              {% when 'buttons' %}
+                <div class="gen-flex small-device-btn-alignment">
+                  {%- if block.settings.button_label_1 != blank -%}
+                    <a
+                      {% if block.settings.button_link_1 == blank %}
+                        role="link" aria-disabled="true"
+                      {% else %}
+                        href="{{ block.settings.button_link_1 }}"
+                      {% endif %}
+                      class="hero-btn-swipe gen-min-w-[220px] btn button {{ button_type_1 }} !gen-flex !gen-items-center !gen-gap-[12px] min-[560px]:!gen-gap-[10px]"
+                    >
+                      {{- block.settings.button_label_1 | escape -}}
+                      {% render 'arrow-line-btn' %}
+                    </a>
+                  {%- endif -%}
+                </div>
+            {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Hero section",
+    "tag": "section",
+    "class": "section",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:sections.all.colors.label",
+        "default": "scheme-1"
+      },
+      {
+        "type": "select",
+        "id": "container_section",
+        "label": "Section Width",
+        "options": [
+          {
+            "value": "fit",
+            "label": "Fit"
+          },
+          {
+            "value": "fill",
+            "label": "Fill"
+          }
+        ],
+        "default": "fit"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_bg",
+        "label": "Image for large screens "
+      },
+      {
+        "type": "image_picker",
+        "id": "image_bg_sm",
+        "label": "Image for small screens "
+      },
+      {
+        "type": "range",
+        "id": "image_overlay_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 10,
+        "unit": "%",
+        "label": "t:sections.image-banner.settings.image_overlay_opacity.label",
+        "default": 0
+      },
+    ],
+    "blocks": [
+      {
+       "type": "@app"
+      },
+      {
+        "type": "heading",
+        "name": "t:sections.image-banner.blocks.heading.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "heading",
+            "default": "The Gift Guide",
+            "label": "t:sections.image-banner.blocks.heading.settings.heading.label"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "name": "t:sections.image-banner.blocks.text.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "text",
+            "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.",
+            "label": "t:sections.image-banner.blocks.text.settings.text.label"
+          }
+        ]
+      },
+      {
+        "type": "buttons",
+        "name": "t:sections.image-banner.blocks.buttons.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "button_label_1",
+            "default": "SHOP NOW",
+            "label": "t:sections.image-banner.blocks.buttons.settings.button_label_1.label",
+            "info": "t:sections.image-banner.blocks.buttons.settings.button_label_1.info"
+          },
+          {
+            "type": "url",
+            "id": "button_link_1",
+            "label": "t:sections.image-banner.blocks.buttons.settings.button_link_1.label"
+          },
+          {
+            "type": "select",
+            "id": "button_1_type",
+            "label": "First button type",
+            "options": [
+              {
+                "value": "primary",
+                "label": "Primary"
+              },
+              {
+                "value": "secondary",
+                "label": "Secondary"
+              },
+              {
+                "value": "tertiary",
+                "label": "Tertiary"
+              }
+            ],
+            "default": "primary"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero section",
+        "blocks": [
+          {
+            "type": "heading"
+          },
+          {
+            "type": "text"
+          },
+          {
+            "type": "buttons"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
