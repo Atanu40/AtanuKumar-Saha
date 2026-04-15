@@ -17,10 +17,10 @@
   <div class="color-{{ section.settings.color_scheme }} gradient gen-py-[15px]">
     <div class="{% if section.settings.container_section == 'fit' %} page-width {% endif %}">
       {% if section.settings.notice_text_lg != blank %}
-        <p class="gen-hidden min-[750px]:gen-block gen-text-center gen-text-[16px] min-[1200px]:gen-text-[18px] gen-font-normal gen-leading-[13.42px] gen-tracking-[0px]">{{ section.settings.notice_text_lg }}</p>
+        <p class="gen-hidden min-[750px]:gen-block gen-text-center gen-text-[16px] min-[1200px]:gen-text-[18px] gen-font-normal gen-leading-[13.42px] gen-tracking-[0px] {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in {% endif %}">{{ section.settings.notice_text_lg }}</p>
       {% endif %}
       {% if section.settings.notice_text_sm != blank %}
-        <p class="gen-block min-[750px]:gen-hidden gen-text-center gen-text-[15px] gen-font-normal gen-leading-[13.42px] gen-tracking-[0px]">{{ section.settings.notice_text_sm }}</p>
+        <p class="gen-block min-[750px]:gen-hidden gen-text-center gen-text-[15px] gen-font-normal gen-leading-[13.42px] gen-tracking-[0px] {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in {% endif %}">{{ section.settings.notice_text_sm }}</p>
       {% endif %}
     </div>
   </div>

@@ -188,7 +188,7 @@
       {%- endif -%}
     {%- endif -%}
 
-    {%- liquid
+    {% comment %} {%- liquid
       if section.settings.menu != blank
         if section.settings.menu_type_desktop == 'dropdown'
           render 'header-dropdown-menu'
@@ -196,7 +196,13 @@
           render 'header-mega-menu'
         endif
       endif
-    %}
+    %} {% endcomment %}
+
+    
+
+    {% if section.settings.menu != blank %}
+      <p class='gen-hidden min-[990px]:gen-block gen-text-center gen-text-[17px] gen-font-normal gen-leading-[13.42px] gen-tracking-[0px]'>{{ section.settings.heading_text }}</p>
+    {% endif %}
 
     {%- if section.settings.logo_position == 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
@@ -252,9 +258,9 @@
           </localization-form>
         {%- endif -%}
       </div>
-      {% render 'header-search', input_id: 'Search-In-Modal' %}
+      {% comment %} {% render 'header-search', input_id: 'Search-In-Modal' %} {% endcomment %}
 
-      {%- if shop.customer_accounts_enabled -%}
+      {% comment %} {%- if shop.customer_accounts_enabled -%}
         <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}">
           <account-icon>
             {%- if customer and customer.has_avatar? -%}
@@ -273,7 +279,7 @@
             -%}
           </span>
         </a>
-      {%- endif -%}
+      {%- endif -%} {% endcomment %}
 
       {%- for block in section.blocks -%}
         {%- case block.type -%}
@@ -282,17 +288,30 @@
         {%- endcase -%}
       {%- endfor -%}
 
-      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
-        {%- liquid
+      <a href="{{ routes.cart_url }}" class="!gen-no-underline header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
+        {% comment %} {%- liquid
           if cart == empty
             render 'icon-cart-empty'
           else
             render 'icon-cart'
           endif
-        -%}
-        <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+        -%} {% endcomment %}
+
+        {% if cart == empty %}
+          {% render 'icon-cart-empty',
+             section: section,
+             nav_button_text: section.settings.nav_button_text
+          %}
+        {% else %}
+          {% render 'icon-cart',
+             section: section,
+             nav_button_text: section.settings.nav_button_text
+          %}
+        {% endif %}
+
+        <span class="visually-hidden gen-block min-[990px]:gen-hidden">{{ 'templates.cart.cart' | t }}</span>
         {%- if cart != empty -%}
-          <div class="cart-count-bubble">
+          <div class="cart-count-bubble !gen-block min-[990px]:!gen-hidden">
             {%- if cart.item_count < 100 -%}
               <span aria-hidden="true">{{ cart.item_count }}</span>
             {%- endif -%}
@@ -490,6 +509,18 @@
       "default": "middle-left",
       "label": "t:sections.header.settings.logo_position.label",
       "info": "t:sections.header.settings.logo_help.content"
+    },
+    {
+      "type": "text",
+      "id": "heading_text",
+      "label": "Heading short text",
+      "default": "Find the ideal gift for your loved ones."
+    },
+    {
+      "type": "text",
+      "id": "nav_button_text",
+      "label": "Navigation button text",
+      "default": "CHOOSE GIFT"
     },
     {
       "type": "link_list",

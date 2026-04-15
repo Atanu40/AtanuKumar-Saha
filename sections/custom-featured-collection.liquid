@@ -2,7 +2,7 @@
 
 {%- style -%}
   .section-{{ section.id }}-margin {
-    margin-top: {{ section.settings.margin_top | times: 0.50 | round: 0 }}px;
+    margin-top: {{ section.settings.margin_top | times: 0.57 | round: 0 }}px;
     margin-bottom: {{ section.settings.margin_bottom | times: 0.53 | round: 0 }}px;
   }
 
@@ -19,8 +19,8 @@
   }
 
   .section-{{ section.id }}-hotspot {
-    top: 50%;
-    left: 50%;
+    top: 14%;
+    left: 65%;
     transform: translate(-50%, -50%);
   }
 
@@ -141,7 +141,7 @@
         </div>
       {% endif %}
       {% comment %} Product Grid Part {% endcomment %}
-      <div class="gen-grid gen-gap-x-[12px] gen-gap-y-[12px] min-[750px]:gen-gap-x-[16px] min-[750px]:gen-gap-y-[16px]  min-[1030px]:gen-gap-x-[18px] min-[1030px]:gen-gap-y-[18px] product-grid-column-sm--{{ section.id }} product-grid-column-lg--{{ section.id }}">
+      <div class="gen-grid gen-gap-x-[12px] gen-gap-y-[12px] min-[750px]:gen-gap-x-[16px] min-[750px]:gen-gap-y-[16px]  min-[1030px]:gen-gap-x-[18px] min-[1030px]:gen-gap-y-[18px] product-grid-column-sm--{{ section.id }} product-grid-column-lg--{{ section.id }} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in {% endif %}">
         {% for block in section.blocks %}
           {% if block.type == 'card' and block.settings.product != blank %}
             {% comment %} Cycle hotspot position index from 1 to 6, then repeat for additional product cards. {% endcomment %}
@@ -165,7 +165,7 @@
     window.__cspPopupInit = true;
 
     /* ── scroll lock ─────────────────────────────────────────── */
-    function lockScroll()   { document.body.style.overflow = 'hidden'; }
+    function lockScroll()   { document.body.style.overflow = ''; }
     function unlockScroll() { document.body.style.overflow = ''; }
 
     /* ── warning helpers ─────────────────────────────────────── */

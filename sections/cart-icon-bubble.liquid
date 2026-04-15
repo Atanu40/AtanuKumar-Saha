@@ -5,9 +5,9 @@
     render 'icon-cart'
   endif
 -%}
-<span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+<span class="visually-hidden gen-block min-[990px]:gen-hidden">{{ 'templates.cart.cart' | t }}</span>
 {%- if cart != empty -%}
-  <div class="cart-count-bubble">
+  <div class="cart-count-bubble !gen-block min-[990px]:!gen-hidden">
     {%- if cart.item_count < 100 -%}
       <span aria-hidden="true">{{ cart.item_count }}</span>
     {%- endif -%}
