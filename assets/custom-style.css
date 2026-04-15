@@ -13,7 +13,7 @@ html {
   }
 
   .heading-h2 {
-    @apply gen-text-[32px] min-[768px]:gen-text-[36px] min-[1030px]:gen-text-[36px] gen-tracking-normal min-[768px]:gen-tracking-[-0.18px] min-[1030px]:gen-tracking-[0px] gen-leading-[120%] gen-font-normal ;
+    @apply gen-text-[28px] min-[560px]:gen-text-[32px] min-[830px]:gen-text-[36px] gen-tracking-normal min-[768px]:gen-tracking-[-0.18px] min-[1030px]:gen-tracking-[0px] gen-leading-[120%] gen-font-normal ;
   }
 
   .text-normal {
@@ -33,3 +33,4 @@ html {
   }
 
 }
+
