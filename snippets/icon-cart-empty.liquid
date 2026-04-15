@@ -1,5 +1,59 @@
-<svg
+{% comment %} <svg
   class="icon icon-cart-empty"
+  aria-hidden="true"
+  focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 40 40"
+  fill="none"
+>
+  <path d="m15.75 11.8h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33l-.78-11.61zm0 1h-2.22l-.71 10.67a4 4 0 0 0 3.99 4.27h7.38a4 4 0 0 0 4-4.27l-.72-10.67h-2.22v.63a4.75 4.75 0 1 1 -9.5 0zm8.5 0h-7.5v.63a3.75 3.75 0 1 0 7.5 0z" fill="currentColor" fill-rule="evenodd"/>
+</svg> {% endcomment %}
+
+{% style %}
+
+.nav-btn-swipe{
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.35s ease;
+  background-color: #FFF544;
+  color: #000000;
+}
+
+.nav-btn-swipe::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: #000000;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s ease;
+  z-index: -1;
+}
+
+  .nav-btn-swipe:hover,
+  .nav-btn-swipe:focus-visible {
+    color: #ffffff;
+  }
+
+  .nav-btn-swipe:hover::after{
+    content: none;
+  }
+
+  .nav-btn-swipe:hover::before,
+  .nav-btn-swipe:focus-visible::before {
+    transform: scaleX(1);
+  }
+
+{% endstyle %}
+
+<button class=" icon icon-cart-empty btn  !gen-w-auto !gen-h-auto gen-hidden min-[990px]:!gen-flex !gen-items-center !gen-gap-[12px] min-[560px]:!gen-gap-[10px] nav-btn-swipe ">
+  {{ nav_button_text | default: section.settings.nav_button_text | default: 'CHOOSE GIFT' }}
+  {% render 'arrow-line-btn' %}
+</button>
+
+<svg
+  class="icon icon-cart-empty gen-block !gen-w-[4.4rem] !gen-h-[4.4rem] min-[990px]:gen-hidden"
   aria-hidden="true"
   focusable="false"
   xmlns="http://www.w3.org/2000/svg"

@@ -28,6 +28,10 @@
     transition: color 0.35s ease;
   }
 
+  .hero-btn-swipe.button--primary::after{
+    content: none;
+  }
+
   .hero-btn-swipe::before {
     content: '';
     position: absolute;
@@ -61,9 +65,8 @@
     <div class="overlay-bannerImage">&nbsp;</div>
     <div class="color-{{ section.settings.color_scheme }} gradient gen-w-full">
       <div class="{% if section.settings.container_section == 'fit' %} page-width {% endif %}">
-        <div class="max-width-small-device gen-max-w-[500px] gen-pt-[25%] min-[750px]:gen-pt-[20%] gen-pb-[15%] min-[750px]:gen-pb-[10%] min-[830px]:gen-pb-[7%] gen-flex gen-flex-col gen-gap-[32px] gen-relative gen-z-[1]">
+        <div class="max-width-small-device gen-max-w-[500px] gen-pt-[25%] min-[750px]:gen-pt-[20%] gen-pb-[15%] min-[750px]:gen-pb-[10%] min-[830px]:gen-pb-[7%] gen-flex gen-flex-col gen-gap-[32px] gen-relative gen-z-[1] {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in {% endif %}">
           {% for block in section.blocks %}
-
             {%- liquid
               if block.settings.button_1_type == 'primary'
                 assign button_type_1 = 'button--primary'
