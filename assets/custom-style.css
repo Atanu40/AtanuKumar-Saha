@@ -1,14 +1,35 @@
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 108px;
+}
+
+
 /*--------- Tailwind Component class -----------*/
 
 @layer components {
 
-
-
-
   .heading-h1 {
-    @apply gen-text-[36px] min-[768px]:gen-text-[40px] min-[1030px]:gen-text-[52px] gen-tracking-normal min-[768px]:gen-tracking-[0.24px] min-[1030px]:gen-tracking-[-1.04px] gen-leading-[110%] gen-font-semibold ;
+    @apply gen-text-[36px] min-[768px]:gen-text-[40px] min-[1030px]:gen-text-[70px] gen-tracking-normal min-[768px]:gen-tracking-[0.24px] min-[1030px]:gen-tracking-[0px] gen-leading-[100%] gen-font-medium ;
   }
 
+  .heading-h2 {
+    @apply gen-text-[32px] min-[768px]:gen-text-[36px] min-[1030px]:gen-text-[36px] gen-tracking-normal min-[768px]:gen-tracking-[-0.18px] min-[1030px]:gen-tracking-[0px] gen-leading-[120%] gen-font-normal ;
+  }
 
+  .text-normal {
+    @apply gen-text-[20px] gen-leading-[140%] gen-font-normal gen-tracking-[0px] ;
+  }
+
+  .btn {
+    @apply !gen-px-12 !gen-py-4 !gen-text-[16px] !gen-leading-[20.48px] !gen-tracking-[0px] !gen-font-normal gen-transition-all gen-duration-300 gen-ease-in-out ;
+  }
+
+  .btn-secondary-border{
+    @apply !gen-border-[1px] !gen-border-solid !gen-border-[var(--color-secondary-button-border)];
+  }
+
+  .btn-tertiary{
+    @apply gen-underline !gen-cursor-pointer !gen-p-[0]
+  }
 
 }
