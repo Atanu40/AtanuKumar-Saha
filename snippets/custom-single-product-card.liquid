@@ -1,0 +1,139 @@
+{%- liquid
+  assign product     = block.settings.product
+  assign popup_id    = 'csp-popup-' | append: block.id
+  assign special_product = blank
+
+  if settings.product != blank
+    if settings.product.first_available_variant
+      assign special_product = settings.product
+    else
+      assign special_product = all_products[settings.product]
+    endif
+  endif
+
+  assign color_pos = ''
+  assign size_pos  = ''
+  for option in product.options_with_values
+    assign oname = option.name | downcase
+    if oname == 'color' or oname == 'colour'
+      assign color_pos = option.position
+    elsif oname == 'size'
+      assign size_pos = option.position
+    endif
+  endfor
+-%}
+
+{% if product.featured_media %}
+  <div class="gen-relative gen-w-full gen-h-0 gen-pb-[100%] min-[750px]:gen-pb-[90%] gen-overflow-hidden">
+    <img
+      src="{{ product.featured_media | image_url: width: 1000 }}"
+      srcset="{{ product.featured_media | image_url: width: 400 }} 400w,
+              {{ product.featured_media | image_url: width: 600 }} 600w,
+              {{ product.featured_media | image_url: width: 800 }} 800w,
+              {{ product.featured_media | image_url: width: 1000 }} 1000w"
+      sizes="100vw"
+      alt="{{ product.title | escape }}"
+      class="gen-absolute gen-top-0 gen-left-0 gen-w-full gen-h-full {% if block.settings.image_ratio == 'cover' %} gen-object-cover {% else %} gen-object-contain {% endif %}"
+      loading="lazy"
+      fetchpriority="{{ fetch_priority }}"
+      width="{{ product.featured_media.width }}"
+      height="{{ product.featured_media.height }}">
+
+    <button
+      type="button"
+      class="csp-trigger gen-absolute gen-z-[1] section-{{ section.id }}-hotspot section-{{ section.id }}-hotspot--{{ hotspot_pattern_index | default: 1 }}"
+      data-popup="{{ popup_id }}"
+      aria-label="Quick view {{ product.title | escape }}"
+    >
+      {% render 'card_pop' %}
+    </button>
+  </div>
+
+  {%- comment -%} ===== Popup Overlay ===== {%- endcomment -%}
+  <div
+    id="{{ popup_id }}"
+    class="csp-overlay"
+    hidden
+    data-color-position="{{ color_pos }}"
+    data-size-position="{{ size_pos }}"
+    {% if special_product and special_product.first_available_variant %}
+      data-special-variant="{{ special_product.first_available_variant.id }}"
+      data-special-name="{{ special_product.title | escape }}"
+      data-special-handle="{{ special_product.handle | escape }}"
+    {% endif %}
+  >
+    <div class="csp-modal" role="dialog" aria-modal="true" aria-label="{{ product.title | escape }}">
+      <button type="button" class="csp-close" aria-label="Close">&times;</button>
+
+      {%- comment -%} Header: thumbnail + name, price, description {%- endcomment -%}
+      <div class="csp-header">
+        <img
+          src="{{ product.featured_media | image_url: width: 200 }}"
+          alt="{{ product.title | escape }}"
+          class="csp-product-img"
+          width="100"
+          height="100"
+        >
+        <div class="csp-header-info">
+          <p class="csp-product-name">{{ product.title }}</p>
+          <p class="csp-product-price">{{ product.price | money }}</p>
+          <p class="csp-product-desc">{{ product.description | strip_html | truncate: 180 }}</p>
+        </div>
+      </div>
+
+      {%- comment -%} Variant options: color swatches + size dropdown {%- endcomment -%}
+      {% for option in product.options_with_values %}
+        {%- assign oname = option.name | downcase -%}
+
+        {% if oname == 'color' or oname == 'colour' %}
+          <p class="csp-option-label">{{ option.name }}</p>
+          <div class="csp-color-grid{% if option.values.size >= 2 %} csp-color-grid--two-col{% endif %}">
+            {% for value in option.values %}
+              {%- liquid
+                if value.swatch.image
+                  assign img_url    = value.swatch.image | image_url: width: 50
+                  assign dot_style  = 'background-image:url(' | append: img_url | append: ');background-size:cover;'
+                elsif value.swatch.color
+                  assign dot_style  = 'background-color:rgb(' | append: value.swatch.color.rgb | append: ');'
+                else
+                  assign dot_style  = 'background-color:' | append: value | downcase | append: ';'
+                endif
+              -%}
+              <button
+                type="button"
+                class="csp-color-pill{% if forloop.first %} is-selected{% endif %}"
+                data-option="{{ option.name | escape }}"
+                data-value="{{ value | escape }}"
+              >
+                <span class="csp-color-dot" style="{{ dot_style }}"></span>
+                <span class="gen-py-[8px]">
+                  {{ value }}
+                </span>
+              </button>
+            {% endfor %}
+          </div>
+
+        {% elsif oname == 'size' %}
+          <p class="csp-option-label">{{ option.name }}</p>
+          <div class="csp-select-wrapper">
+            <select class="csp-size-select" data-option="{{ option.name | escape }}">
+              <option value="">Choose your size</option>
+              {% for value in option.values %}
+                <option value="{{ value | escape }}">{{ value }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      {%- comment -%} Variants JSON for JS variant matching {%- endcomment -%}
+      <script type="application/json" class="csp-variants-json">{{ product.variants | json }}</script>
+
+      <p class="csp-added-msg" hidden></p>
+      <button type="button" class="csp-add-btn">
+        ADD TO CART &nbsp;
+        {% render 'arrow-line-btn' %}
+      </button>
+    </div>
+  </div>
+{% endif %}

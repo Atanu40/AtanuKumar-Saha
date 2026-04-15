@@ -1,0 +1,228 @@
+/* ================================================================
+   Custom Single Product Card — Popup Styles
+   ================================================================ */
+
+/* Overlay backdrop */
+.csp-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+}
+.csp-overlay[hidden] {
+  display: none;
+}
+
+/* Modal card */
+.csp-modal {
+  background: #fff;
+  width: 100%;
+  max-width: 350px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 38px 24px 24px;
+  position: relative;
+  border-radius: 0;
+}
+
+/* Close button */
+.csp-close {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  color: #000;
+  padding: 0;
+}
+.csp-close:hover {
+  opacity: 0.6;
+}
+
+/* Header row */
+.csp-header {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.csp-product-img {
+  width: 120px;
+  height: auto;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.csp-header-info {
+  flex: 1;
+  min-width: 0;
+}
+.csp-product-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 6px;
+  line-height: 1.3;
+}
+.csp-product-price {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 8px;
+}
+.csp-product-desc {
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Option label */
+.csp-option-label {
+  font-size: 13px;
+  font-weight: 500;
+  margin: 16px 0 8px;
+  letter-spacing: 0.02em;
+}
+
+/* Color grid */
+.csp-color-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.csp-color-grid--two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+
+/* Color pill */
+.csp-color-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0px 8px 0px 0px;
+  border: 1px solid #ccc;
+  background: none;
+  cursor: pointer;
+  font-size: 15px;
+  text-align: left;
+  transition: border-color 0.15s, border-width 0.15s;
+  width: 100%;
+}
+.csp-color-pill:hover {
+  border-color: #888;
+}
+.csp-color-pill.is-selected {
+  border: 2px solid #000;
+}
+
+/* Color dot swatch */
+.csp-color-dot {
+  width: 6px;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Size select wrapper */
+.csp-select-wrapper {
+  position: relative;
+}
+.csp-select-wrapper::after {
+  content: '';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 6px;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+}
+.csp-size-select {
+  width: 100%;
+  padding: 11px 40px 11px 12px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 15px;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  border-radius: 0;
+}
+.csp-size-select:focus {
+  outline: none;
+  border-color: #000;
+}
+
+/* Success / added message */
+.csp-added-msg {
+  text-align: center;
+  font-size: 12px;
+  color: #444;
+  margin: 14px 0 4px;
+  font-weight: 500;
+}
+
+/* Inline validation warning */
+.csp-warning-msg {
+  font-size: 12px;
+  color: #c0392b;
+  font-weight: 500;
+  margin: 12px 0 4px;
+  text-align: center;
+}
+.csp-warning-msg[hidden] {
+  display: none;
+}
+.csp-added-msg[hidden] {
+  display: none;
+}
+
+/* Add to cart button */
+.csp-add-btn {
+  width: 100%;
+  padding: 15px;
+  background: #000;
+  color: #fff;
+  border: none;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 20px;
+  transition: background 0.2s;
+}
+.csp-add-btn:hover {
+  background: #333;
+}
+.csp-add-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Icon trigger button reset */
+.csp-trigger {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  line-height: 0;
+}

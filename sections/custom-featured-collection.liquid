@@ -1,6 +1,8 @@
+{{ 'single-productcard-custom.css' | asset_url | stylesheet_tag }}
+
 {%- style -%}
   .section-{{ section.id }}-margin {
-    margin-top: {{ section.settings.margin_top | times: 0.32 | round: 0 }}px;
+    margin-top: {{ section.settings.margin_top | times: 0.50 | round: 0 }}px;
     margin-bottom: {{ section.settings.margin_bottom | times: 0.53 | round: 0 }}px;
   }
 
@@ -9,6 +11,18 @@
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
+  .large-device-text-content{
+    justify-content: {% if section.settings.content_alignment_small == 'left' %} flex-start
+      {% elsif section.settings.content_alignment_small == 'center' %} center
+      {% else %} flex-end
+      {% endif %};
+  }
+
+  .section-{{ section.id }}-hotspot {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
   @media screen and (min-width: 560px){
     .section-{{ section.id }}-margin {
@@ -19,6 +33,10 @@
     .section-{{ section.id }}-padding{
       padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
       padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+
+    .large-device-text-content{
+      justify-content: {% if section.settings.content_alignment_large == 'left' %} flex-start {% elsif section.settings.content_alignment_large == 'center' %} center {% else %} flex-end {% endif %};
     }
   }
 
@@ -44,6 +62,46 @@
       padding-top: {{ section.settings.padding_top | times: 0.99 | round: 0 }}px;
       padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
     }
+
+    .product-grid-column-lg--{{ section.id }}{
+      grid-template-columns: repeat({{ section.settings.columns_desktop }}, minmax(0, 1fr));
+    }
+
+    .section-{{ section.id }}-hotspot--1 {
+      top: 64%;
+      left: 62%;
+      transform: translate(-50%, -50%);
+    }
+
+    .section-{{ section.id }}-hotspot--2 {
+      top: 53%;
+      left: 85%;
+      transform: translate(-50%, -50%);
+    }
+
+    .section-{{ section.id }}-hotspot--3 {
+      top: 21%;
+      left: 78%;
+      transform: translate(-50%, -50%);
+    }
+
+    .section-{{ section.id }}-hotspot--4 {
+      top: 27%;
+      left: 72%;
+      transform: translate(-50%, -50%);
+    }
+
+    .section-{{ section.id }}-hotspot--5 {
+      top: 26%;
+      left: 51%;
+      transform: translate(-50%, -50%);
+    }
+
+    .section-{{ section.id }}-hotspot--6 {
+      top: 54%;
+      left: 76%;
+      transform: translate(-50%, -50%);
+    }
   }
 
   @media screen and (min-width: 1560px) {
@@ -57,12 +115,298 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  @media screen and (max-width: 1030px){
+    .product-grid-column-sm--{{ section.id }}{
+      {% if section.settings.columns_mobile == '1'%}
+        grid-template-columns: 1fr;
+      {% else %}
+        grid-template-columns: 1fr 1fr;
+      {% endif %}
+    }
+  }
+
+
+
 {%- endstyle -%}
 
 
-<section>
+<div class="section-{{ section.id }}-margin">
+  <div class="color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+    <div class="{% if section.settings.container_section == 'fit' %} page-width {% endif %}">
+    {% comment %} Top Heading Part {% endcomment %}
+      {% if section.settings.heading != blank %}
+        <div class="gen-flex large-device-text-content gen-mb-[25px] min-[560px]:gen-mb-[30px] min-[830px]:gen-mb-[36px]">
+          <h2 class="heading-h2 {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in {% endif %}">
+            {{ section.settings.heading }}
+          </h2>
+        </div>
+      {% endif %}
+      {% comment %} Product Grid Part {% endcomment %}
+      <div class="gen-grid gen-gap-x-[12px] gen-gap-y-[12px] min-[750px]:gen-gap-x-[16px] min-[750px]:gen-gap-y-[16px]  min-[1030px]:gen-gap-x-[18px] min-[1030px]:gen-gap-y-[18px] product-grid-column-sm--{{ section.id }} product-grid-column-lg--{{ section.id }}">
+        {% for block in section.blocks %}
+          {% if block.type == 'card' and block.settings.product != blank %}
+            {% comment %} Cycle hotspot position index from 1 to 6, then repeat for additional product cards. {% endcomment %}
+            {% assign hotspot_pattern_index = forloop.index0 | modulo: 6 | plus: 1 %}
+            {% render 'custom-single-product-card',
+              section: section,
+              block: block,
+              hotspot_pattern_index: hotspot_pattern_index
+            %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
 
-</section>
+
+<script>
+(function () {
+  if (window.__cspPopupInit) return;
+  window.__cspPopupInit = true;
+
+  /* ── scroll lock ─────────────────────────────────────────── */
+  function lockScroll()   { document.body.style.overflow = 'hidden'; }
+  function unlockScroll() { document.body.style.overflow = ''; }
+
+  /* ── warning helpers ─────────────────────────────────────── */
+  function showWarning(modal, message) {
+    let el = modal.querySelector('.csp-warning-msg');
+    if (!el) {
+      el = document.createElement('p');
+      el.className = 'csp-warning-msg';
+      modal.querySelector('.csp-add-btn').before(el);
+    }
+    el.textContent = message;
+    el.removeAttribute('hidden');
+  }
+  function clearWarning(root) {
+    const el = root.querySelector('.csp-warning-msg');
+    if (el) el.setAttribute('hidden', '');
+  }
+
+  /* ── popup open / close ──────────────────────────────────── */
+  function openPopup(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.removeAttribute('hidden');
+    lockScroll();
+  }
+  function closePopup(overlay) {
+    overlay.setAttribute('hidden', '');
+    unlockScroll();
+    const msg = overlay.querySelector('.csp-added-msg');
+    if (msg) { msg.textContent = ''; msg.setAttribute('hidden', ''); }
+    clearWarning(overlay);
+  }
+
+  /* ── find best-matching variant ──────────────────────────── */
+  function findVariant(variants, colorPos, sizePos, selectedColor, selectedSize) {
+    for (let i = 0; i < variants.length; i++) {
+      const v          = variants[i];
+      const colorMatch = !colorPos || !selectedColor || v['option' + colorPos] === selectedColor;
+      const sizeMatch  = !sizePos  || !selectedSize  || v['option' + sizePos]  === selectedSize;
+      if (colorMatch && sizeMatch) return v.id;
+    }
+    return variants.length > 0 ? variants[0].id : null;
+  }
+
+  /* ── update cart icon bubble count ────────────────────────── */
+  function updateCartBubble(sectionsData) {
+    if (!sectionsData['cart-icon-bubble']) return;
+    const bubbleEl = document.getElementById('cart-icon-bubble');
+    if (!bubbleEl) return;
+    try {
+      const parsed = new DOMParser().parseFromString(sectionsData['cart-icon-bubble'], 'text/html');
+      const freshHTML = parsed.querySelector('.shopify-section');
+      if (freshHTML) bubbleEl.innerHTML = freshHTML.innerHTML;
+    } catch (e) { /* bubble update failed silently */ }
+  }
+
+  /* ── open cart drawer using Shopify section HTML ─────────── */
+  function openCartDrawer(sectionsData) {
+    /* Always update the bubble icon, even if the drawer fails */
+    updateCartBubble(sectionsData);
+
+    const cartDrawer = document.querySelector('cart-drawer');
+    if (!cartDrawer) return;
+
+    /* Remove is-empty so items are visible after the first add-to-cart.
+       product-form.js normally does this in its finally block, but since
+       we use a custom fetch here that block never runs. */
+    cartDrawer.classList.remove('is-empty');
+
+    try {
+      if (typeof cartDrawer.renderContents === 'function') {
+        cartDrawer.renderContents({ sections: sectionsData });
+      } else {
+        cartDrawer.open();
+      }
+    } catch (e) {
+      /* Fallback: just open the drawer without re-rendering */
+      try { cartDrawer.open(); } catch (_) {}
+    }
+  }
+
+  /* ── core fetch + drawer open ────────────────────────────── */
+  function doAddToCart(items, addBtn, modal, overlay) {
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        items: items,
+        sections: ['cart-drawer', 'cart-icon-bubble'],
+        sections_url: window.location.pathname
+      })
+    })
+    .then((r) => {
+      if (!r.ok) throw new Error('Cart error');
+      return r.json();
+    })
+    .then((response) => {
+      addBtn.disabled = false;
+
+      /* Close popup FIRST so cart drawer is never behind the overlay */
+      closePopup(overlay);
+
+      /* Open cart drawer with fresh HTML from Shopify response */
+      if (response.sections) openCartDrawer(response.sections);
+    })
+    .catch(() => {
+      showWarning(modal, 'Something went wrong. Please try again.');
+      addBtn.disabled = false;
+    });
+  }
+
+  /* ── main add-to-cart handler ────────────────────────────── */
+  function handleAddToCart(addBtn) {
+    const modal   = addBtn.closest('.csp-modal');
+    const overlay = addBtn.closest('.csp-overlay');
+
+    /* Collect selections */
+    const colorPill     = modal.querySelector('.csp-color-pill.is-selected');
+    const selectedColor = colorPill ? colorPill.dataset.value.trim() : null;
+    const sizeSelect    = modal.querySelector('.csp-size-select');
+    const selectedSize  = sizeSelect ? sizeSelect.value.trim() : null;
+
+    /* Validation — warn inline, no alert() */
+    const hasColorOptions = modal.querySelectorAll('.csp-color-pill').length > 0;
+    if (hasColorOptions && !selectedColor) {
+      showWarning(modal, 'Please select a color.');
+      return;
+    }
+    if (sizeSelect && !selectedSize) {
+      showWarning(modal, 'Please select a size.');
+      return;
+    }
+
+    const colorPos   = parseInt(overlay.dataset.colorPosition) || 0;
+    const sizePos    = parseInt(overlay.dataset.sizePosition)  || 0;
+    const variantsEl = modal.querySelector('.csp-variants-json');
+    const variants   = variantsEl ? JSON.parse(variantsEl.textContent) : [];
+
+    /* Special rule: Color = Black + Size = Medium → Soft Winter Jacket */
+    const isBlackMedium = (
+      selectedColor && selectedColor.toLowerCase() === 'black' &&
+      selectedSize  && selectedSize.toLowerCase()  === 'm'
+    );
+
+    if (isBlackMedium) {
+      addBtn.disabled = true;
+
+      const baseVariantId = findVariant(variants, colorPos, sizePos, selectedColor, selectedSize);
+      if (!baseVariantId) {
+        showWarning(modal, 'No matching variant found.');
+        addBtn.disabled = false;
+        return;
+      }
+
+      const specialHandle = (overlay.dataset.specialHandle || '').trim();
+      const preloadedId = overlay.dataset.specialVariant;
+      const addBothItems = (specialVariantId) => {
+        const cartItems = [
+          { id: Number(baseVariantId), quantity: 1 },
+          { id: Number(specialVariantId), quantity: 1 }
+        ];
+        doAddToCart(cartItems, addBtn, modal, overlay);
+      };
+
+      /* If special product is not configured in theme settings, add only selected product */
+      if (!preloadedId && !specialHandle) {
+        doAddToCart([{ id: Number(baseVariantId), quantity: 1 }], addBtn, modal, overlay);
+        return;
+      }
+
+      if (preloadedId) {
+        /* Variant pre-loaded in Liquid via all_products */
+        addBothItems(preloadedId);
+      } else {
+        /* Liquid didn't preload variant — try runtime fetch by configured handle */
+        fetch('/products/' + encodeURIComponent(specialHandle) + '.js')
+          .then((r) => r.ok ? r.json() : Promise.reject('not-found'))
+          .then((product) => {
+            const firstAvail = product.variants.find((v) => v.available) || product.variants[0];
+            /* Cache for future use */
+            overlay.dataset.specialVariant = String(firstAvail.id);
+            overlay.dataset.specialName    = overlay.dataset.specialName || product.title;
+            addBothItems(firstAvail.id);
+          })
+          .catch(() => {
+            /* If configured special product is unavailable, continue with selected product only */
+            doAddToCart([{ id: Number(baseVariantId), quantity: 1 }], addBtn, modal, overlay);
+          });
+      }
+      return;
+    }
+
+    /* Normal variant matching */
+    const variantId = findVariant(variants, colorPos, sizePos, selectedColor, selectedSize);
+    if (!variantId) {
+      showWarning(modal, 'No matching variant found. Please try again.');
+      return;
+    }
+    addBtn.disabled = true;
+    doAddToCart([{ id: Number(variantId), quantity: 1 }], addBtn, modal, overlay);
+  }
+
+  /* ── event delegation ────────────────────────────────────── */
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('.csp-trigger');
+    if (trigger) { e.preventDefault(); openPopup(trigger.dataset.popup); return; }
+
+    if (e.target.classList.contains('csp-overlay')) { closePopup(e.target); return; }
+
+    const closeBtn = e.target.closest('.csp-close');
+    if (closeBtn) { closePopup(closeBtn.closest('.csp-overlay')); return; }
+
+    const pill = e.target.closest('.csp-color-pill');
+    if (pill) {
+      pill.closest('.csp-color-grid').querySelectorAll('.csp-color-pill').forEach((p) => p.classList.remove('is-selected'));
+      pill.classList.add('is-selected');
+      clearWarning(pill.closest('.csp-modal'));
+      return;
+    }
+
+    const addBtn = e.target.closest('.csp-add-btn');
+    if (addBtn) handleAddToCart(addBtn);
+  });
+
+  /* Clear size warning on select change */
+  document.addEventListener('change', (e) => {
+    if (e.target.classList.contains('csp-size-select')) {
+      clearWarning(e.target.closest('.csp-modal'));
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.csp-overlay:not([hidden])').forEach(closePopup);
+    }
+  });
+})();
+</script>
+
 
 {% schema %}
   {
@@ -100,6 +444,46 @@
         "id": "heading",
         "default": "Tisso vison in the wild",
         "label": "t:sections.featured-collection.settings.title.label"
+      },
+      {
+        "type": "select",
+        "id": "content_alignment_large",
+        "options": [
+          {
+            "value": "left",
+            "label": "t:settings_schema.global.settings.text_alignment.options__1.label"
+          },
+          {
+            "value": "center",
+            "label": "t:settings_schema.global.settings.text_alignment.options__2.label"
+          },
+          {
+            "value": "right",
+            "label": "t:settings_schema.global.settings.text_alignment.options__3.label"
+          }
+        ],
+        "default": "left",
+        "label": "Content alignment on large screens"
+      },
+      {
+        "type": "select",
+        "id": "content_alignment_small",
+        "options": [
+          {
+            "value": "left",
+            "label": "t:settings_schema.global.settings.text_alignment.options__1.label"
+          },
+          {
+            "value": "center",
+            "label": "t:settings_schema.global.settings.text_alignment.options__2.label"
+          },
+          {
+            "value": "right",
+            "label": "t:settings_schema.global.settings.text_alignment.options__3.label"
+          }
+        ],
+        "default": "center",
+        "label": "Content alignment on small screens"
       },
       {
         "type": "range",
