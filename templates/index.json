@@ -47,6 +47,18 @@
         "image_overlay_opacity": 10
       }
     },
+    "notice_bar_bbjzbT": {
+      "type": "notice-bar",
+      "name": "Notice Bar",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "container_section": "fit",
+        "notice_text_lg": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL",
+        "notice_text_sm": "SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR",
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
     "custom_featured_collection_4KYF9R": {
       "type": "custom-featured-collection",
       "blocks": {
@@ -119,6 +131,7 @@
   },
   "order": [
     "hero_section_RDxfbw",
+    "notice_bar_bbjzbT",
     "custom_featured_collection_4KYF9R"
   ]
 }
