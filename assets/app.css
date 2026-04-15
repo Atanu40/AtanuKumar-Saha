@@ -652,24 +652,6 @@ video {
   width: 100%;
 }
 
-.gen-gap-x-\[16px\] {
-  -moz-column-gap: 16px;
-       column-gap: 16px;
-}
-
-.gen-gap-y-\[16px\] {
-  row-gap: 16px;
-}
-
-.gen-gap-x-\[14px\] {
-  -moz-column-gap: 14px;
-       column-gap: 14px;
-}
-
-.gen-gap-y-\[14px\] {
-  row-gap: 14px;
-}
-
 .gen-gap-x-\[12px\] {
   -moz-column-gap: 12px;
        column-gap: 12px;
@@ -696,10 +678,6 @@ video {
 .gen-py-\[8px\] {
   padding-top: 8px;
   padding-bottom: 8px;
-}
-
-.gen-pb-\[90\%\] {
-  padding-bottom: 90%;
 }
 
 .gen-pb-\[100\%\] {
