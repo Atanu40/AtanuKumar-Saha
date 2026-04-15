@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "image_banner": {
@@ -41,9 +50,85 @@
         "show_text_box": false,
         "desktop_content_alignment": "center",
         "color_scheme": "scheme-3",
+        "image_behavior": "none",
         "mobile_content_alignment": "center",
         "stack_images_on_mobile": false,
         "show_text_below": false
+      }
+    },
+    "custom_featured_collection_4KYF9R": {
+      "type": "custom-featured-collection",
+      "blocks": {
+        "card_4WQDwE": {
+          "type": "card",
+          "settings": {
+            "product": "black-leather-bag",
+            "image_ratio": "cover",
+            "corner_radius": 0
+          }
+        },
+        "card_k4dmHp": {
+          "type": "card",
+          "settings": {
+            "product": "blue-silk-tuxedo",
+            "image_ratio": "cover",
+            "corner_radius": 0
+          }
+        },
+        "card_HEbDmR": {
+          "type": "card",
+          "settings": {
+            "product": "chequered-red-shirt",
+            "image_ratio": "cover",
+            "corner_radius": 0
+          }
+        },
+        "card_YxMYaa": {
+          "type": "card",
+          "settings": {
+            "product": "classic-leather-jacket",
+            "image_ratio": "cover",
+            "corner_radius": 0
+          }
+        },
+        "card_7GPBPf": {
+          "type": "card",
+          "settings": {
+            "product": "classic-varsity-top",
+            "image_ratio": "cover",
+            "corner_radius": 0
+          }
+        },
+        "card_MizfgH": {
+          "type": "card",
+          "settings": {
+            "product": "dark-denim-top",
+            "image_ratio": "cover",
+            "corner_radius": 0
+          }
+        }
+      },
+      "block_order": [
+        "card_4WQDwE",
+        "card_k4dmHp",
+        "card_HEbDmR",
+        "card_YxMYaa",
+        "card_7GPBPf",
+        "card_MizfgH"
+      ],
+      "name": "Custom Featured Collection",
+      "settings": {
+        "color_scheme": "",
+        "container_section": "fit",
+        "heading": "Tisso vison in the wild",
+        "content_alignment_large": "left",
+        "content_alignment_small": "center",
+        "columns_desktop": 3,
+        "columns_mobile": "2",
+        "margin_top": 52,
+        "margin_bottom": 48,
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "rich_text": {
@@ -59,7 +144,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>"
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
           }
         }
       },
@@ -68,6 +153,8 @@
         "text"
       ],
       "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
         "color_scheme": "scheme-1",
         "full_width": true,
         "padding_top": 40,
@@ -79,17 +166,25 @@
       "settings": {
         "title": "Featured products",
         "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
         "collection": "all",
         "products_to_show": 8,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "full_width": false,
         "show_view_all": false,
-        "swipe_on_mobile": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-1",
         "image_ratio": "adapt",
+        "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
+        "quick_add": "none",
         "columns_mobile": "2",
+        "swipe_on_mobile": false,
         "padding_top": 28,
         "padding_bottom": 36
       }
@@ -127,6 +222,7 @@
         "heading_size": "h2",
         "desktop_layout": "left",
         "mobile_layout": "collage",
+        "card_styles": "product-card-wrapper",
         "color_scheme": "scheme-1",
         "padding_top": 36,
         "padding_bottom": 36
@@ -136,8 +232,9 @@
       "type": "video",
       "settings": {
         "heading": "",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "heading_size": "h1",
+        "enable_video_looping": false,
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "description": "",
         "full_width": false,
         "color_scheme": "scheme-1",
@@ -152,7 +249,7 @@
           "type": "column",
           "settings": {
             "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
             "link_label": "",
             "link": ""
           }
@@ -161,7 +258,7 @@
           "type": "column",
           "settings": {
             "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
             "link_label": "",
             "link": ""
           }
@@ -170,7 +267,7 @@
           "type": "column",
           "settings": {
             "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
             "link_label": "",
             "link": ""
           }
@@ -191,9 +288,9 @@
         "background_style": "none",
         "button_label": "",
         "button_link": "",
-        "swipe_on_mobile": false,
         "color_scheme": "scheme-1",
         "columns_mobile": "1",
+        "swipe_on_mobile": false,
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -201,6 +298,7 @@
   },
   "order": [
     "image_banner",
+    "custom_featured_collection_4KYF9R",
     "rich_text",
     "featured_collection",
     "collage",
